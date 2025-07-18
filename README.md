@@ -1,7 +1,9 @@
 # Data-Structure-and-Algorithm
 a cpp code repo for DSA-teaching
 
-数据结构与算法的c++代码库，做了一些设计，希望在robustness和cleanness之间取得一个平衡点
+数据结构与算法的c++模板代码库，做了一些设计，希望在robustness和cleanness之间取得一个平衡点
+
+基本去掉了移动语义
 
 注意：
     使用哨兵节点的数据结构目前的实现都要求存储的值的类型能够默认构造；
