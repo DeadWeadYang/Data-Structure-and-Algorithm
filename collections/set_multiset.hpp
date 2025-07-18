@@ -41,17 +41,9 @@ namespace DSA
                 using const_reverse_iterator = std::reverse_iterator<const_iterator>;
                 Set() = default;
                 explicit Set(const value_compare &comp) : impl{comp} {};
-                // template <class InputIterator>
-                // Set(InputIterator first, InputIterator last,
-                //     const value_compare &comp = value_compare());
-                // Set(const Set &s) impl{s.impe} {}
-                // Set(Set &&s) {};
-                // Set(initializer_list<value_type> il, const value_compare &comp = value_compare());
+                explicit Set(const Set &s) : impl(s.impl) {}
                 ~Set() = default;
-
-                // Set &operator=(const Set &s);
-                // Set &operator=(Set &&s);
-                // Set &operator=(initializer_list<value_type> il);
+                Set &operator=(const Set &s) { impl = s.impl; }
 
                 // iterators:
                 iterator begin() { return impl.begin(); }
@@ -129,17 +121,10 @@ namespace DSA
                 using const_reverse_iterator = std::reverse_iterator<const_iterator>;
                 MultiSet() = default;
                 explicit MultiSet(const value_compare &comp) : impl{comp} {};
-                // template <class InputIterator>
-                // MultiSet(InputIterator first, InputIterator last,
-                //     const value_compare &comp = value_compare());
-                // MultiSet(const MultiSet &s) impl{s.impe} {}
-                // MultiSet(MultiSet &&s) {};
-                // MultiSet(initializer_list<value_type> il, const value_compare &comp = value_compare());
+                MultiSet(const MultiSet &s) : impl(s.impl) {}
                 ~MultiSet() = default;
 
-                // MultiSet &operator=(const MultiSet &s);
-                // MultiSet &operator=(MultiSet &&s);
-                // MultiSet &operator=(initializer_list<value_type> il);
+                MultiSet &operator=(const MultiSet &s) { impl = s.impl; }
 
                 // iterators:
                 iterator begin() { return impl.begin(); }
@@ -162,12 +147,6 @@ namespace DSA
                 size_type size() const { return impl.size(); }
 
                 iterator insert(const value_type &v) { return impl.insert_multi(v); }
-                // pair<iterator, bool> insert(value_type &&v);
-                // iterator insert(const_iterator position, const value_type &v);
-                // iterator insert(const_iterator position, value_type &&v);
-                // template <class InputIterator>
-                // void insert(InputIterator first, InputIterator last);
-                // void insert(initializer_list<value_type> il);
 
                 iterator erase(const_iterator position) { return impl.erase_multi(position); }
                 size_type erase(const key_type &k) { return impl.erase_multi(k); }
