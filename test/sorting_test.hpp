@@ -28,14 +28,14 @@ namespace DSA
                     throw std::runtime_error(ss.str());
                 }
             }
-            void BobbleSortDemo()
+            void BubbleSortDemo()
             {
                 auto tmp = input;
-                BobbleSort(tmp.begin(), tmp.end());
+                BubbleSort(tmp.begin(), tmp.end());
                 if (tmp != output)
                 {
                     std::ostringstream ss;
-                    ss << "BobbleSort fail, got :";
+                    ss << "BubbleSort fail, got :";
                     Print(tmp, ss);
                     throw std::runtime_error(ss.str());
                 }
@@ -128,7 +128,7 @@ namespace DSA
                 instance.input = input;
                 instance.output = input;
                 std::sort(instance.output.begin(), instance.output.end());
-                instance.BobbleSortDemo();
+                instance.BubbleSortDemo();
                 instance.HeapSortDemo();
                 instance.InsertionSortDemo();
                 instance.IntRadixSortDemo();

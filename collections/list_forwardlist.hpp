@@ -181,9 +181,12 @@ namespace DSA
                     }
                     void clear()
                     {
-                        destroyNodeInternal(begin_ptr(), end_ptr());
-                        // 清空后，重置 header 节点的指针，恢复到空链表状态。
-                        begin_ptr()->link(begin_ptr());
+                        if (begin_ptr() != end_ptr())
+                        {
+                            destroyNodeInternal(begin_ptr(), end_ptr());
+                            // 清空后，重置 header 节点的指针，恢复到空链表状态。
+                            header->n_prev = header->n_next = header;
+                        }
                     }
                     // RAII：析构时自动清理所有节点内存。
                     ~ListBase()
@@ -543,10 +546,10 @@ namespace DSA
                             // 3b. 如果槽位不为空，将槽内的子链表与 carry 合并。
                             iterator first_anchor = std::prev(sorted_ranges[i].first);
                             merge_range(sorted_ranges[i].first, sorted_ranges[i].second, carry.first, carry.second);
-                            //合并后的结果成为新的 carry，继续向上层槽位尝试。
+                            // 合并后的结果成为新的 carry，继续向上层槽位尝试。
                             carry.first = std::next(first_anchor);
                             carry.second = std::prev(it);
-                            sorted_ranges[i] = empty_range;// 清空当前槽位。
+                            sorted_ranges[i] = empty_range; // 清空当前槽位。
                         }
                     }
                     // 4. 合并 sorted_ranges 中所有剩余的子链表，直到只剩一个。
@@ -631,7 +634,7 @@ namespace DSA
                         ++this->size_r;
                     }
                 }
-                //O(1)的重载
+                // O(1)的重载
                 static void splice_range(const_iterator pos, const_iterator first, const_iterator prelast, size_type &size_change1, size_type &size_change2, size_type change_size)
                 {
                     Node *n_first = getNode(first);
@@ -641,8 +644,8 @@ namespace DSA
                     unlink_range(n_first, n_prelast);
                     link_range(getNode(pos), n_first, n_prelast);
                 }
-                //O(|[first,prelast]|)的重载
-                // note: pos shall not be in [first,prelast]
+                // O(|[first,prelast]|)的重载
+                //  note: pos shall not be in [first,prelast]
                 static void splice_range(const_iterator pos, const_iterator first, const_iterator prelast, size_type &size_change1, size_type &size_change2)
                 {
                     splice_range(pos, first, prelast, size_change1, size_change2, std::distance(first, prelast) + 1);
@@ -716,7 +719,7 @@ namespace DSA
                             unlink_range(first, prelast);
                             link_range(getNode(first1), first, prelast);
                             if (pos2 == prelast2)
-                                return;// range2 已全部合并完毕。
+                                return; // range2 已全部合并完毕。
                             first2 = peek2;
                         }
                         // 4. 如果 range1 已检查到末尾，将 range2 剩余部分全部拼接到后面。

@@ -59,17 +59,9 @@ namespace DSA
                 };
                 Map() = default;
                 explicit Map(const key_compare &comp) : impl{comp} {};
-                // template <class InputIterator>
-                // Map(InputIterator first, InputIterator last,
-                //     const value_compare &comp = value_compare());
-                // Map(const Map &s) impl{s.impe} {}
-                // Map(Map &&s) {};
-                // Map(initializer_list<value_type> il, const value_compare &comp = value_compare());
+                Map(const Map &m): impl(m.impl) {}
                 ~Map() = default;
-
-                // Map &operator=(const Map &s);
-                // Map &operator=(Map &&s);
-                // Map &operator=(initializer_list<value_type> il);
+                Map &operator=(const Map &m) { impl = m.impl; }
 
                 // iterators:
                 iterator begin() { return impl.begin(); }
@@ -92,12 +84,6 @@ namespace DSA
                 size_type size() const { return impl.size(); }
 
                 std::pair<iterator, bool> insert(const value_type &v) { return impl.insert_unique(v); }
-                // pair<iterator, bool> insert(value_type &&v);
-                // iterator insert(const_iterator position, const value_type &v);
-                // iterator insert(const_iterator position, value_type &&v);
-                // template <class InputIterator>
-                // void insert(InputIterator first, InputIterator last);
-                // void insert(initializer_list<value_type> il);
 
                 iterator erase(const_iterator position) { return impl.erase_unique(position); }
                 size_type erase(const key_type &k) { return impl.erase_unique(k); }
@@ -193,17 +179,10 @@ namespace DSA
                 };
                 MultiMap() = default;
                 explicit MultiMap(const key_compare &comp) : impl{comp} {};
-                // template <class InputIterator>
-                // MultiMap(InputIterator first, InputIterator last,
-                //     const value_compare &comp = value_compare());
-                // MultiMap(const MultiMap &s) impl{s.impe} {}
-                // MultiMap(MultiMap &&s) {};
-                // MultiMap(initializer_list<value_type> il, const value_compare &comp = value_compare());
+                MultiMap(const MultiMap &m) :impl(m.impe) {}
                 ~MultiMap() = default;
 
-                // MultiMap &operator=(const MultiMap &s);
-                // MultiMap &operator=(MultiMap &&s);
-                // MultiMap &operator=(initializer_list<value_type> il);
+                MultiMap &operator=(const MultiMap &m){impl=m.impl;}
 
                 // iterators:
                 iterator begin() { return impl.begin(); }
@@ -226,12 +205,6 @@ namespace DSA
                 size_type size() const { return impl.size(); }
 
                 iterator insert(const value_type &v) { return impl.insert_multi(v); }
-                // pair<iterator, bool> insert(value_type &&v);
-                // iterator insert(const_iterator position, const value_type &v);
-                // iterator insert(const_iterator position, value_type &&v);
-                // template <class InputIterator>
-                // void insert(InputIterator first, InputIterator last);
-                // void insert(initializer_list<value_type> il);
 
                 iterator erase(const_iterator position) { return impl.erase_multi(position); }
                 size_type erase(const key_type &k) { return impl.erase_multi(k); }

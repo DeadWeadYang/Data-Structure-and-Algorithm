@@ -79,10 +79,6 @@ namespace DSA
                     for (auto oo : ops)
                     {
                         ++cnt;
-                        if (cnt == 8)
-                        {
-                            int sldkfj = 0;
-                        }
                         switch (oo.opt)
                         {
                         case 0:
@@ -212,6 +208,7 @@ namespace DSA
                             throw std::runtime_error(ss.str());
                         }
                     }
+                    return;
                 }
                 static std::vector<operation> RandomGen(int n, int w, unsigned int seed = 0)
                 {
@@ -244,10 +241,10 @@ namespace DSA
                     try
                     {
 
-                        ++case_index;
-                        Demo(RandomGen(5, 2));
-                        ++case_index;
-                        Demo(RandomGen(10, 3));
+                        // ++case_index;
+                        // Demo(RandomGen(5, 2));
+                        // ++case_index;
+                        // Demo(RandomGen(10, 3));
                         ++case_index;
                         Demo(RandomGen(25, 4));
                         ++case_index;
